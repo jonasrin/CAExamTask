@@ -1,4 +1,4 @@
-package lt.codeacademy.cauzduotis.comment;
+package lt.codeacademy.cauzduotis.AdminComment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/comment")
+@RequestMapping(path = "/api/comment")
 public class CommentController {
 
     private final CommentService commentService;
@@ -16,12 +16,12 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/get-comments")
     public List<CommentView> getCommentsList(){
         return commentService.getCommentsList();
     }
 
-    @PostMapping (path = "create-comment")
+    @PostMapping (path = "/create-comment")
     public CommentView createComment(@RequestBody CommentView commentView){
         return commentService.createComment(commentView);
     }

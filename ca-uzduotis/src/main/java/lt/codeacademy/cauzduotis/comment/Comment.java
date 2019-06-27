@@ -1,18 +1,19 @@
 package lt.codeacademy.cauzduotis.comment;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lt.codeacademy.cauzduotis.AdminComment.AdminComment;
 import lt.codeacademy.cauzduotis.entry.Entry;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-
+@ToString
+@EqualsAndHashCode
 @Data
-public class Comment {
+public class Comment{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +37,11 @@ public class Comment {
     }
 
     public Comment() {
+    }
+
+    public Comment(String authorName, String commentText, LocalDate commentSaveDate) {
+        this.authorName = authorName;
+        this.commentText = commentText;
+        this.commentSaveDate = commentSaveDate;
     }
 }
