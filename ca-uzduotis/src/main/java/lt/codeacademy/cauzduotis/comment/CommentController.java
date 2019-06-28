@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @Api(value = "CommentController", description = "REST APIs related to Comment Entity!!!!")
 @RestController
@@ -26,7 +27,7 @@ public class CommentController {
     }
 
     @PostMapping (path = "/create-comment")
-    public CommentView createComment(@RequestBody CommentView commentView){
+    public CommentView createComment(@Valid @RequestBody CommentView commentView){
         return commentService.createComment(commentView);
     }
 

@@ -2,6 +2,8 @@ package lt.codeacademy.cauzduotis.exception.advice;
 
 import lt.codeacademy.cauzduotis.exception.ExceptionResponse;
 import lt.codeacademy.cauzduotis.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,16 +24,17 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
+    Logger logger = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleNotFound(Exception ex, WebRequest request) throws IOException {
-//        response.sendError(HttpStatus.NOT_FOUND.value());
+
 
         ExceptionResponse errors = new ExceptionResponse();
         errors.setTimestamp(LocalDateTime.now());
         errors.setError(ex.getMessage());
         errors.setStatus(HttpStatus.NOT_FOUND.value());
-
+        logger.error(ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 
@@ -54,8 +57,15 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
                 .collect(Collectors.toList());
 
         body.put("errors", errors);
-
+        logger.error("Not all required fields are entered:\n " + constructErrorString(errors));
         return new ResponseEntity<>(body, headers, status);
+    }
 
+    private String constructErrorString(List<String> errorList) {
+        String errors = "";
+        for (String error : errorList) {
+            errors += error + "\n";
+        }
+        return errors;
     }
 }

@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Api(value = "AdminCommentController", description = "REST APIs related to AdminComment Entity!!!!")
 @RestController
@@ -18,7 +18,7 @@ public class AdminCommentController {
     }
 
     @PostMapping(path = "/addcomment")
-    public AdminCommentView addComment(@RequestBody AdminCommentView adminCommentView){
+    public AdminCommentView addComment(@Valid @RequestBody AdminCommentView adminCommentView){
         return adminCommentService.addComment(adminCommentView);
     }
 
