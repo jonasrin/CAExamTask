@@ -1,10 +1,14 @@
 package lt.codeacademy.cauzduotis.comment;
 
+import io.swagger.annotations.Api;
+import lt.codeacademy.cauzduotis.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Api(value = "CommentController", description = "REST APIs related to Comment Entity!!!!")
 @RestController
 @RequestMapping(path = "/api/comment")
 public class CommentController {
@@ -24,5 +28,11 @@ public class CommentController {
     @PostMapping (path = "/create-comment")
     public CommentView createComment(@RequestBody CommentView commentView){
         return commentService.createComment(commentView);
+    }
+
+    @ExceptionHandler({EmptyResultDataAccessException.class, NotFoundException.class})
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public void notFound() {
+
     }
 }

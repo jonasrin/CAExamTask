@@ -1,8 +1,8 @@
-package lt.codeacademy.cauzduotis.entry;
+package lt.codeacademy.cauzduotis.article;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EntryRepository extends JpaRepository<Entry, Long> {
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 }

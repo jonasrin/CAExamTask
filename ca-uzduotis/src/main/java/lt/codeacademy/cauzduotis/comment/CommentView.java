@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lt.codeacademy.cauzduotis.AdminComment.AdminComment;
-import lt.codeacademy.cauzduotis.entry.Entry;
+import lt.codeacademy.cauzduotis.article.Article;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
@@ -19,15 +19,15 @@ public class CommentView {
     @NotEmpty(message = "Prašau, įrašykite komentarą")
     private String commentText;
     private LocalDate commentSaveDate;
-    private Entry entry;
+    private Article article;
     private AdminComment adminComment;
 
-    public CommentView(long id, String authorName, String commentText, LocalDate commentSaveDate, Entry entry, AdminComment adminComment) {
+    public CommentView(long id, String authorName, String commentText, LocalDate commentSaveDate, Article article, AdminComment adminComment) {
         this.id = id;
         this.authorName = authorName;
         this.commentText = commentText;
         this.commentSaveDate = commentSaveDate;
-        this.entry = entry;
+        this.article = article;
         this.adminComment = adminComment;
     }
 

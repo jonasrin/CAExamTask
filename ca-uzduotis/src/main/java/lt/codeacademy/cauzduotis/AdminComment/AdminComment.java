@@ -1,11 +1,13 @@
 package lt.codeacademy.cauzduotis.AdminComment;
 
 import lombok.*;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @ToString
@@ -15,8 +17,9 @@ public class AdminComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @NonNull
     private String userName;
+    @NonNull
     private String answerText;
 
     public AdminComment(String userName, String answerText) {
