@@ -37,34 +37,48 @@ class AddArticle extends React.Component {
     }
 }
 
-function AddCommentForm(props) {
-    const createComment = async event => {
+class AddCommentForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.handleAuthorInputChange = this.handleAuthorInputChange.bind(this);
+
+    }
+    createComment = async event => {
         event.preventDefault();
         // if (!contact.value || !contact.icon || !contact.link) return;
         // props.initialFormState = [{ ...this.state.authorName, ...this.state.commentText }];
-        props.response = await post(API_ENDPOINTS.addArticle, this.state);
+        this.state.response = await post(API_ENDPOINTS.addArticle, this.state);
     };
-    const handleAuthorInputChange = event => {
+    handleAuthorInputChange = event => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
-    const handleCommentInputChange = event => {
+    handleCommentInputChange = event => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
-    return (
-        <div>
-            <Form>
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" name="authorName" value={props.authorName} onChange={handleAuthorInputChange} placeholder="Enter your name" />
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" name="commentText" value={props.commentText} onChange={handleCommentInputChange} placeholder="Enter your name" rows="3" />
-                <Button variant="primary" onClick={createComment}>
-                    Save Changes
+    handleHeadlineChange = event => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+    }
+    render() {
+        return (
+            <div>
+                <Form>
+                    <Form.Label>Author Name</Form.Label>
+                    <Form.Control type="text" name="authorName" value={this.state.authorName} onChange={this.handleAuthorInputChange} placeholder="Enter your name" />
+                    <Form.Label>Headline</Form.Label>
+                    <Form.Control type="text" name="headline" value={this.state.headline} onChange={this.handleHeadlineChange} placeholder="Enter headline of your article" />
+                    <Form.Label>Article text</Form.Label>
+                    <Form.Control as="textarea" name="articleText" value={this.state.articleText} onChange={this.handleCommentInputChange} placeholder="Enter your article" rows="3" />
+                    <Button variant="primary" onClick={this.createComment}>
+                        Save Changes
                 </Button>
-            </Form>
+                </Form>
 
-        </div>)
+            </div>)
+    }
 
 }
 export default AddArticle;
