@@ -22,10 +22,18 @@ class Index extends React.Component {
     handleshowAddArticle(props) {
         this.setState({
             showAddArticle: !this.state.showAddArticle,
-            showArticleList: !this.state.showArticleList,
-            showArticle: !this.state.showArticle,
         });
-
+        if (!this.state.showAddArticle) {
+            this.setState({
+                showArticleList: false,
+                showArticle: false,
+            });
+        } else {
+            this.setState({
+                showArticleList: true,
+                showArticle: false,
+            });
+        }
     }
     handleArticleListClick() {
         this.setState({
