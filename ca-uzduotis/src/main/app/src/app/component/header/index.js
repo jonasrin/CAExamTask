@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './index.css';
 import { Jumbotron, Button, Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
-import CommentModal from '../modal/addComment';
 import LoginModal from '../modal/login';
 import AddArticle from '../modal/addArticle';
 

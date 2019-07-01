@@ -27,6 +27,7 @@ public class ArticleService {
         List<ArticleView> articleViewList = articleRepository.findAll().stream()
                 .map(this::mapToView)
                 .collect(Collectors.toList());
+
         logger.info("Got entries count: " + articleViewList.size());
         return articleViewList;
     }
