@@ -1,6 +1,9 @@
 package lt.codeacademy.cauzduotis.comment;
 
+import lt.codeacademy.cauzduotis.article.Article;
+import lt.codeacademy.cauzduotis.article.ArticleRepository;
 import lt.codeacademy.cauzduotis.article.ArticleService;
+import lt.codeacademy.cauzduotis.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +17,12 @@ import java.util.stream.Collectors;
 public class CommentService {
     Logger logger = LoggerFactory.getLogger(CommentService.class);
     private final CommentsRepository commentsRepository;
+    private final ArticleRepository articleRepository;
 
     @Autowired
-    public CommentService(CommentsRepository commentsRepository) {
+    public CommentService(CommentsRepository commentsRepository, ArticleRepository articleRepository) {
         this.commentsRepository = commentsRepository;
+        this.articleRepository = articleRepository;
     }
 
     public List<CommentView> getCommentsList() {
@@ -28,10 +33,13 @@ public class CommentService {
         return commentViewList;
     }
 
-    public CommentView createComment(CommentView commentView) {
-        CommentView view = mapToView(commentsRepository.save(mapFromView(commentView)));
-        logger.info("Comment was created." + view.toString());
-        return view;
+    public CommentView createComment(CommentView commentView, long id) {
+        Comment comment = mapFromView(commentView);
+        Article article = articleRepository.findById(id).orElseThrow(() -> new NotFoundException("Article with id=" + id + " was not found. "));
+        article.addComment(comment);
+        articleRepository.save(article);
+        logger.info("Comment was created." + comment.toString());
+        return mapToView(comment);
     }
 
     private CommentView mapToView(Comment comment) {

@@ -26,9 +26,9 @@ public class CommentController {
         return commentService.getCommentsList();
     }
 
-    @PostMapping (path = "/create-comment")
-    public CommentView createComment(@Valid @RequestBody CommentView commentView){
-        return commentService.createComment(commentView);
+    @PostMapping (path = "/create-comment/{id}")
+    public CommentView createComment(@Valid @RequestBody CommentView commentView, @PathVariable(name = "id") long id){
+        return commentService.createComment(commentView, id);
     }
 
     @ExceptionHandler({EmptyResultDataAccessException.class, NotFoundException.class})

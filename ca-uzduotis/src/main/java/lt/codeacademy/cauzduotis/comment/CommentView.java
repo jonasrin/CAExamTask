@@ -19,17 +19,8 @@ public class CommentView {
     @NotEmpty(message = "Prašau, įrašykite komentarą")
     private String commentText;
     private LocalDate commentSaveDate;
-    private Article article;
     private AdminComment adminComment;
 
-    public CommentView(long id, String authorName, String commentText, LocalDate commentSaveDate, Article article, AdminComment adminComment) {
-        this.id = id;
-        this.authorName = authorName;
-        this.commentText = commentText;
-        this.commentSaveDate = commentSaveDate;
-        this.article = article;
-        this.adminComment = adminComment;
-    }
 
     public CommentView() {
     }

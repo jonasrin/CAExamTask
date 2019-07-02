@@ -13,7 +13,6 @@ class AddComment extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.state = {
             show: false,
-            btnName: 'Add Comment',
             response: {},
         };
     }
@@ -32,7 +31,7 @@ class AddComment extends React.Component {
         return (
             <div>
                 <Button variant="primary" onClick={this.handleShow}>{this.state.show ? 'Cancel add Comment' : 'Add Comment'}</Button>
-                {this.state.show ? <AddCommentForm /> : null}
+                {this.state.show ? <AddCommentForm id={this.props.id} /> : null}
             </div>
         );
     }
@@ -50,7 +49,8 @@ class AddCommentForm extends React.Component {
     createComment = async event => {
         event.preventDefault();
         this.setState.initialFormState = [{ ...this.state.authorName, ...this.state.commentText }];
-        this.setState.response = await post(API_ENDPOINTS.addcomment, this.state);
+        this.setState.response = await post(API_ENDPOINTS.addcomment + `${this.props.id}`, this.state);
+        this.forceUpdate();
     };
     handleAuthorInputChange = event => {
         const { name, value } = event.target;

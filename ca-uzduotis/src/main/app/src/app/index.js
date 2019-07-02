@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './component/header';
 import { Container, Button } from 'react-bootstrap';
-import Article from './component/article';
+import Articleas from './component/article';
 import ArticleList from './component/articleList';
 import AddArticle from './component/addArticle';
 
@@ -16,6 +16,7 @@ class Index extends React.Component {
             showAddArticle: false,
             showArticleList: true,
             showArticle: false,
+            articleId: {},
         };
 
     }
@@ -35,12 +36,16 @@ class Index extends React.Component {
             });
         }
     }
-    handleArticleListClick() {
+    handleArticleListClick(props) {
         this.setState({
             showAddArticle: false,
             showArticleList: false,
             showArticle: true,
+            articleId: props,
         });
+        // return (
+        //     <Articleas propsas={props} />
+        // )
     }
     render() {
         return (
@@ -48,9 +53,9 @@ class Index extends React.Component {
                 <div className="App">
                     <Header handleshowAddArticle={this.handleshowAddArticle} />
                     <main className="App--content ">
-                        {this.state.showArticleList ? <ArticleList handleArticleListClick={this.handleArticleListClick} /> : null}
+                        {this.state.showArticleList ? <ArticleList handleArticleListClick={this.handleArticleListClick} handleshowAddArticle={this.handleshowAddArticle} /> : null}
                         {this.state.showAddArticle ? <AddArticle /> : null}
-                        {this.state.showArticle ? <Article /> : null}
+                        {this.state.showArticle ? <Articleas props={this.state.articleId} /> : null}
                     </main>
                 </div>
             </Container>

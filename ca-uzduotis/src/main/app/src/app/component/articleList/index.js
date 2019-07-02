@@ -4,11 +4,21 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import './index.css';
 import { useFetch } from '../../utils/fetchHook';
 import { API_DOMAIN, API_ENDPOINTS } from '../../utils/constants';
+import { tsPropertySignature } from '@babel/types';
+import ReactDOM from 'react-dom';
+import Articleas from '../article';
+
 
 function Item(props) {
     return (
-        <div onClick={props.handleArticleListClick}>
-            <div>
+        <div >
+            {/* <div key={props.data.id} onClick={props.handleShowArticle(props.data.id)} > */}
+            <div onClick={() => {
+                props.handleShowArticle(props.data.id);
+                props.handleArticleListClick(props.data);
+
+            }
+            }>
                 <h1>{props.data.headline}</h1>
                 <h6>{props.data.articleSaveDate}</h6>
                 <p>{props.data.headlineText}</p>
@@ -23,43 +33,67 @@ class ArticleList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: '',
-            data: '',
+            showArticle: true,
+            id: 0,
         };
-    }
-    handleGetArticles() {
+        this.handleShowArticle = this.handleShowArticle.bind(this);
+        this.handleArticleListClick = props.handleArticleListClick.bind(this);
+        this.handleshowAddArticle = props.handleshowAddArticle.bind(this);
 
-        // 
+    }
+
+    handleShowArticle(id) {
+        // this.setState({ id: id });
+        // this.setState.showArticle = !this.state.showArticle;
+        // this.forceUpdate(this);
+        // ShowArticleas(this.state.id);
     }
 
     render() {
-        this.handleGetArticles();
         return (
-            <LoadData />
+            <div>
+                {this.state.showArticle ?
+                    <LoadData showArticle={this.state.showArticle} handleShowArticle={this.handleShowArticle} handleArticleListClick={this.handleArticleListClick} />
+                    :
+                    <Articleas id={this.state.id} />}
 
 
+                {/* <LoadData handleShowArticle={this.handleShowArticle} showArticle={this.state.showArticle} />
+                {/* <LoadData showArticle={this.state.showArticle} /> */}
+            </div>
         );
     }
 }
 
+function ShowArticleas(props) {
+    return (
+        <Articleas id={2} />
+    )
+}
+
 function LoadData(props) {
-    let { loading, data, setData } = useFetch(API_ENDPOINTS.getContacts);
+    let { loading, data, setData } = useFetch(API_ENDPOINTS.getArticles);
     let addArticle = article => {
         setData([...data, article])
-        alert(addArticle);
     };
+
     return (
-        <div onClick={props.handleArticleListClick}>
+
+        <div >
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                    data.map(article => (
-                        <Item headline={data.headline} data={article} />
-                    ))
-                )}
+                    data.map(
+                        function (article) {
+                            return (<Item data={article} handleShowArticle={props.handleShowArticle} handleArticleListClick={props.handleArticleListClick} />)
+                        }
+                    )
+                )
+            }
 
         </div>
     )
 }
+
 
 export default ArticleList;

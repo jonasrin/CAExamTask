@@ -5,41 +5,27 @@ import AddComment from '../addComment';
 
 
 
-function Comment() {
+function Comment(props) {
     const commentResp = '';
     return (
         <div>
-            <AddComment comment={commentResp} />
+            <AddComment comment={commentResp} id={props.id} />
             <ul>
-                <li>
-                    <p>Comment author</p>
-                    <p>komentaras</p>
-                    <button>Answer</button>
-                    <p>Admin answer to comment</p>
-                </li>
-                <li>
-                    <p>Comment author</p>
-                    <p>komentaras</p>
-                    <button>Answer</button>
-                    <p>Admin answer to comment</p>
-                </li>
-                <li>
-                    <p>Comment author</p>
-                    <p>komentaras</p>
-                    <button>Answer</button>
-                    <p>Admin answer to comment</p>
-                </li>
-                <li>
-                    <p>Comment author</p>
-                    <p>komentaras</p>
-                    <button>Answer</button>
-                    <p>Admin answer to comment</p>
-                </li>
+                {props.comments.map(comment => <ListComment data={comment} />)}
             </ul>
-
-
         </div>
     );
+}
+
+function ListComment(props) {
+    return (
+        <li>
+            <p>{props.data.authorName}</p>
+            <p>{props.data.commentText}</p>
+            {/* <button>Answer</button> */}
+            <p>{props.data.adminComment}</p>}
+        </li>
+    )
 }
 
 export default Comment;

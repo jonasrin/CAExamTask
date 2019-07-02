@@ -89,4 +89,8 @@ public class ArticleService {
     private CommentView mapToCommentView(Comment comment) {
         return new CommentView(comment.getId(), comment.getAuthorName(), comment.getCommentText(), comment.getCommentSaveDate(), comment.getAdminComment());
     }
+
+    public ArticleView getArticleById(long id) {
+        return mapToView(findArticleById(id));
+    }
 }

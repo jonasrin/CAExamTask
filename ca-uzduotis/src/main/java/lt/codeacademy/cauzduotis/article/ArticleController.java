@@ -25,6 +25,10 @@ public class ArticleController {
         return articleService.getArticleList();
     }
 
+    @GetMapping(path = "/get-article/{id}")
+    public ArticleView getArticleById(@PathVariable(name = "id") long id){
+        return articleService.getArticleById(id);
+    }
 
     @PostMapping(path = "/create-article")
     public ArticleView addArticle(@Valid @RequestBody ArticleView articleView){
