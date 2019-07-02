@@ -11,6 +11,7 @@ import java.util.List;
 @Api(value = "ArticleController", description = "REST APIs related to Article Entity!!!!")
 @RestController
 @RequestMapping(path = "/api/article")
+@CrossOrigin("*")
 public class ArticleController {
     private final ArticleService articleService;
 

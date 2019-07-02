@@ -9,6 +9,7 @@ import javax.validation.Valid;
 @Api(value = "AdminCommentController", description = "REST APIs related to AdminComment Entity!!!!")
 @RestController
 @RequestMapping(path = "/api/admincomment")
+@CrossOrigin("*")
 public class AdminCommentController {
     private final AdminCommentService adminCommentService;
 
@@ -17,9 +18,9 @@ public class AdminCommentController {
         this.adminCommentService = adminCommentService;
     }
 
-    @PostMapping(path = "/addcomment")
-    public AdminCommentView addComment(@Valid @RequestBody AdminCommentView adminCommentView){
-        return adminCommentService.addComment(adminCommentView);
+    @PostMapping(path = "/addcomment/{id}")
+    public AdminCommentView addComment(@Valid @RequestBody AdminCommentView adminCommentView, @PathVariable(name = "id") long id){
+        return adminCommentService.addComment(adminCommentView, id);
     }
 
 }

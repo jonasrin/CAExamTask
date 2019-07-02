@@ -40,6 +40,7 @@ class ArticleList extends React.Component {
         this.handleArticleListClick = props.handleArticleListClick.bind(this);
         this.handleshowAddArticle = props.handleshowAddArticle.bind(this);
 
+
     }
 
     handleShowArticle(id) {
@@ -53,7 +54,7 @@ class ArticleList extends React.Component {
         return (
             <div>
                 {this.state.showArticle ?
-                    <LoadData showArticle={this.state.showArticle} handleShowArticle={this.handleShowArticle} handleArticleListClick={this.handleArticleListClick} />
+                    <LoadData showArticle={this.state.showArticle} handleShowArticle={this.handleShowArticle} handleArticleListClick={this.handleArticleListClick} handleshowAddArticle={this.handleshowAddArticle} />
                     :
                     <Articleas id={this.state.id} />}
 
@@ -63,12 +64,6 @@ class ArticleList extends React.Component {
             </div>
         );
     }
-}
-
-function ShowArticleas(props) {
-    return (
-        <Articleas id={2} />
-    )
 }
 
 function LoadData(props) {

@@ -20,10 +20,14 @@ function Comment(props) {
 function ListComment(props) {
     return (
         <li>
-            <p>{props.data.authorName}</p>
-            <p>{props.data.commentText}</p>
+            <p>Komentatoriaus vardas: {props.data.authorName}</p>
+            <p>komentaras: {props.data.commentText}</p>
             {/* <button>Answer</button> */}
-            <p>{props.data.adminComment}</p>}
+            <div>
+                <p>Vartotojo vardas: {props.data.adminComment.userName}</p>
+                <p>atsakymas: {props.data.adminComment.answerText}</p>
+            </div>
+
         </li>
     )
 }

@@ -4,5 +4,6 @@ export const API_ENDPOINTS = {
 
     getArticles: "/api/article/get-article/",
     getArticleById: "/api/article/get-article/",
-    addArticle: "/api/article/create-article/"
+    addArticle: "/api/article/create-article/",
+    editArticle: "/api/article/edit-article/"
 };

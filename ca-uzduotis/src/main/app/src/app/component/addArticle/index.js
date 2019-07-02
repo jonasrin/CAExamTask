@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './index.css';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { post } from '../../utils/post';
+import { put } from '../../utils/put';
 import { API_ENDPOINTS } from '../../utils/constants';
 class AddArticle extends React.Component {
     constructor(props, context) {
@@ -19,6 +20,8 @@ class AddArticle extends React.Component {
             commentList: {},
             headline: '',
             headlineText: '',
+            isEditArticle: this.props.isEditArticle,
+            props
         };
     }
     handleClose() {
@@ -31,7 +34,9 @@ class AddArticle extends React.Component {
     render() {
         return (
             <div >
-                <AddCommentForm props={this.state} />
+                {this.isEditArticle ? <EditCommentForm props={this.state} /> : <AddCommentForm props={this.state} />}
+
+
             </div>
         );
     }
@@ -46,8 +51,6 @@ class AddCommentForm extends React.Component {
     }
     createComment = async event => {
         event.preventDefault();
-        // if (!contact.value || !contact.icon || !contact.link) return;
-        // props.initialFormState = [{ ...this.state.authorName, ...this.state.commentText }];
         this.state.response = await post(API_ENDPOINTS.addArticle, this.state);
     };
     handleAuthorInputChange = event => {
@@ -63,6 +66,10 @@ class AddCommentForm extends React.Component {
         this.setState({ [name]: value });
     }
     render() {
+        if (this.props !== null) {
+
+        }
+
         return (
             <div>
                 <Form>
@@ -72,6 +79,72 @@ class AddCommentForm extends React.Component {
                     <Form.Control type="text" name="headline" value={this.state.headline} onChange={this.handleHeadlineChange} placeholder="Enter headline of your article" />
                     <Form.Label>Article text</Form.Label>
                     <Form.Control as="textarea" name="articleText" value={this.state.articleText} onChange={this.handleCommentInputChange} placeholder="Enter your article" rows="3" />
+                    <Button variant="primary" onClick={this.createComment}>
+                        Save Changes
+                </Button>
+                </Form>
+
+            </div>)
+    }
+
+}
+
+class EditCommentForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = ({
+            editableArticle: props.props.props.props
+        });
+        this.handleAuthorInputChange = this.handleAuthorInputChange.bind(this);
+
+    }
+    createComment = async event => {
+        this.state.response = await put(API_ENDPOINTS.editArticle, this.state.editableArticle, this.state.editableArticle.id);
+    };
+    handleAuthorInputChange = event => {
+        this.setState({
+            editableArticle: {
+                id: this.state.editableArticle.id,
+                authorName: event.target.value,
+                articleText: this.state.editableArticle.articleText,
+                headline: this.state.editableArticle.headline,
+            }
+        });
+    }
+    handleCommentInputChange = event => {
+        this.setState({
+            editableArticle: {
+                id: this.state.editableArticle.id,
+                articleText: event.target.value,
+                authorName: this.state.editableArticle.authorName,
+                headline: this.state.editableArticle.headline,
+            }
+        });
+    }
+    handleHeadlineChange = event => {
+        this.setState({
+            editableArticle: {
+                id: this.state.editableArticle.id,
+                headline: event.target.value,
+                authorName: this.state.editableArticle.authorName,
+                articleText: this.state.editableArticle.articleText,
+            }
+        });
+    }
+    render() {
+        if (this.props !== null) {
+
+        }
+        // let editableArticle = this.props.props.props.props;
+        return (
+            <div>
+                <Form>
+                    <Form.Label>Author Name</Form.Label>
+                    <Form.Control type="text" name="authorName" value={this.state.editableArticle.authorName} onChange={this.handleAuthorInputChange} placeholder="Enter your name" />
+                    <Form.Label>Headline</Form.Label>
+                    <Form.Control type="text" name="headline" value={this.state.editableArticle.headline} onChange={this.handleHeadlineChange} placeholder="Enter headline of your article" />
+                    <Form.Label>Article text</Form.Label>
+                    <Form.Control as="textarea" name="articleText" value={this.state.editableArticle.articleText} onChange={this.handleCommentInputChange} placeholder="Enter your article" rows="3" />
                     <Button variant="primary" onClick={this.createComment}>
                         Save Changes
                 </Button>

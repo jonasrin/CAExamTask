@@ -5,6 +5,8 @@ import Comment from '../comment';
 import { useFetch } from '../../utils/fetchHook';
 import { API_DOMAIN, API_ENDPOINTS } from '../../utils/constants';
 import { tsPropertySignature } from '@babel/types';
+import { Button } from 'react-bootstrap';
+import AddArticle from '../addArticle';
 
 
 
@@ -13,14 +15,9 @@ class Articleas extends React.Component {
         super(props);
         this.state = ({
             props
-            // id: props.id,
-            // articleSaveDate: props.articleSaveDate,
-            // articleText: props.articleText,
-            // authorName: props.authorName,
-            // // commentList: {props.commentList},
-            // headline: props.headline,
-            // headlineText: props.headlineText,
         });
+        this.handleArticleShowListClick = props.handleArticleShowListClick.bind(this);
+        this.handleArticleEditClick = props.handleArticleEditClick.bind(this);
     }
     // handleArticles() {
     //     const url = API_ENDPOINTS.getArticleById + `${this.state.id}`;
@@ -34,25 +31,16 @@ class Articleas extends React.Component {
 
         return (
             <div >
-                <h1> fjakldjfkladjflkajfla</h1>
-                {/* {this.loading ? (
-                    <div>Loading...</div>
-                ) : (
-                        this.data.map(article => (
-                            // <Item data={article} handleShowArticle={props.handleShowArticle}  */}
                 <div>
+                    <Button onClick={() => this.handleArticleEditClick(this.state.props.props)} isEditArticle={false}>edit</Button><Button>delete</Button>
                     <h1>{this.state.props.props.headline}</h1>
                     <h6>{this.props.props.articleSaveDate}</h6>
                     <p>{this.props.props.headlineText}</p>
                     <p>{this.props.props.articleText}</p>
                     <p>{this.props.props.authorName}</p>
-                    <button>go back</button>
+                    <Button onClick={this.handleArticleShowListClick}>go back</Button>
                     <Comment comments={this.props.props.commentViewList} id={this.props.props.id} />
                 </div>
-                {/* ))
-                    )
-                } */}
-
             </div>
         );
     }

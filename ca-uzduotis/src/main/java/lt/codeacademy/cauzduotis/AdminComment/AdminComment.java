@@ -10,9 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@ToString
-@EqualsAndHashCode
-@Data
+
 public class AdminComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

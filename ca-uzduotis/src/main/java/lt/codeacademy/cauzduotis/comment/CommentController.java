@@ -12,6 +12,7 @@ import java.util.List;
 @Api(value = "CommentController", description = "REST APIs related to Comment Entity!!!!")
 @RestController
 @RequestMapping(path = "/api/comment")
+@CrossOrigin("*")
 public class CommentController {
 
     private final CommentService commentService;
