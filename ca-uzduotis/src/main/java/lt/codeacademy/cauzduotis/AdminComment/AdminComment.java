@@ -1,28 +1,25 @@
 package lt.codeacademy.cauzduotis.AdminComment;
 
-import lombok.*;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
-
 public class AdminComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NonNull
-    private String userName;
+    private String authorName;
     @NonNull
-    private String answerText;
+    private String commentText;
 
-    public AdminComment(String userName, String answerText) {
-        this.userName = userName;
-        this.answerText = answerText;
+    public AdminComment(String authorName, String commentText) {
+        this.authorName = authorName;
+        this.commentText = commentText;
     }
 
     public AdminComment() {
@@ -36,19 +33,19 @@ public class AdminComment {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
-    public String getAnswerText() {
-        return answerText;
+    public String getCommentText() {
+        return commentText;
     }
 
-    public void setAnswerText(String answerText) {
-        this.answerText = answerText;
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 }

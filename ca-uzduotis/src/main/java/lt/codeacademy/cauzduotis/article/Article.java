@@ -21,12 +21,14 @@ public class Article {
     @NonNull
     @NotEmpty(message = "Please, enter headline.")
     private String headline;
-    @Length(max = 90)
+//    @Length(max = 90)
     @NonNull
     private String headlineText;
     @NonNull
     private LocalDate articleSaveDate;
     @NonNull
+    @Lob
+//    @Column( length = 100000 )
     private String articleText;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "article_id",
@@ -34,8 +36,8 @@ public class Article {
     private List<Comment> commentList;
     @NonNull
     private String authorName;
-
-    public Article(String headline, @Length(max = 90) String headlineText, LocalDate articleSaveDate, String entryText, List<Comment> commentList, String authorName) {
+//    @Length(max = 90)
+    public Article(String headline,  String headlineText, LocalDate articleSaveDate, String entryText, List<Comment> commentList, String authorName) {
         this.headline = headline;
         this.headlineText = headlineText;
         this.articleSaveDate = articleSaveDate;
@@ -43,8 +45,8 @@ public class Article {
         this.commentList = commentList;
         this.authorName = authorName;
     }
-
-    public Article(String headline, @Length(max = 90) String headlineText, LocalDate articleSaveDate, String entryText, String authorName) {
+//    @Length(max = 90)
+    public Article(String headline,  String headlineText, LocalDate articleSaveDate, String entryText, String authorName) {
         this.headline = headline;
         this.headlineText = headlineText;
         this.articleSaveDate = articleSaveDate;

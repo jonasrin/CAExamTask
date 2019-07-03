@@ -25,8 +25,9 @@ function Item(props) {
                 <p>{props.data.authorName}</p>
             </div>
 
-
+            <hr />
         </div>
+
     )
 }
 class ArticleList extends React.Component {

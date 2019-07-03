@@ -13,6 +13,7 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.handleshowAddArticle = props.handleshowAddArticle.bind(this);
+        this.handleArticleShowListClick = props.handleArticleShowListClick.bind(this);
         this.state = {
             showAddArticle: props.showAddArticle,
             showArticleList: props.showArticleList,
@@ -24,21 +25,16 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.handleshowAddArticle()}>Add Article</button></div >
-
-            // <header className={Jumbotron}>
-
-            //     <Navbar bg="light" expand="lg">
-            //         <Navbar.Brand href="#home">Kshysia blog</Navbar.Brand>
-            //         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            //         <Navbar.Collapse id="basic-navbar-nav">
-            //             <Nav className="mr-auto">
-            //                 <LoginModal />
-
-            //             </Nav>
-            //         </Navbar.Collapse>
-            //     </Navbar>
-            // </header >
+                <Navbar bg="light" expand="lg">
+                    <Navbar.Brand onClick={() => this.handleArticleShowListClick()}>Kshysia blog</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Button onClick={() => this.handleshowAddArticle()}>Add Article</Button>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div >
         );
     }
 }

@@ -13,12 +13,14 @@ class Index extends React.Component {
         this.handleshowAddArticle = this.handleshowAddArticle.bind(this);
         this.handleArticleListClick = this.handleArticleListClick.bind(this);
         this.handleArticleEditClick = this.handleArticleEditClick.bind(this);
+        this.handleArticleShowListClick = this.handleArticleShowListClick.bind(this);
+        this.handleArticleShowListClick = this.handleArticleShowListClick.bind(this);
         this.state = {
             showAddArticle: false,
             showArticleList: true,
             showArticle: false,
             articleId: {},
-            isEditArticle: true,
+            isEditArticle: false,
         };
 
     }
@@ -27,8 +29,9 @@ class Index extends React.Component {
             showAddArticle: false,
             showArticleList: true,
             showArticle: false,
+            articleId: {},
+            isEditArticle: false,
         });
-        this.forceUpdate();
     }
 
     handleshowAddArticle(props) {
@@ -57,12 +60,13 @@ class Index extends React.Component {
         });
 
     }
-    handleArticleEditClick(props, editable) {
+
+    handleArticleEditClick(props) {
         this.setState({
             showAddArticle: true,
             showArticleList: false,
             showArticle: false,
-            isEditArticle: editable,
+            isEditArticle: true,
             articleId: props,
         });
         // return (
@@ -73,10 +77,10 @@ class Index extends React.Component {
         return (
             <Container>
                 <div className="App">
-                    <Header handleshowAddArticle={this.handleshowAddArticle} />
+                    <Header handleshowAddArticle={this.handleshowAddArticle} handleArticleShowListClick={this.handleArticleShowListClick} />
                     <main className="App--content ">
                         {this.state.showArticleList ? <ArticleList handleArticleListClick={this.handleArticleListClick} handleshowAddArticle={this.handleshowAddArticle} /> : null}
-                        {this.state.showAddArticle ? <AddArticle props={this.state.articleId} isEditArticle={this.state.isEditArticle} /> : null}
+                        {this.state.showAddArticle ? <AddArticle props={this.state.articleId} isEditArticle={this.state.isEditArticle} handleArticleShowListClick={this.handleArticleShowListClick} /> : null}
                         {this.state.showArticle ? <Articleas props={this.state.articleId} handleArticleEditClick={this.handleArticleEditClick} handleArticleShowListClick={this.handleArticleShowListClick} /> : null}
                     </main>
                 </div>

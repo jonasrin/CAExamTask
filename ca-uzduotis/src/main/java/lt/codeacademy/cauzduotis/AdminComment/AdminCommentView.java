@@ -13,13 +13,13 @@ public class AdminCommentView {
     private long id;
 
     @NotEmpty(message = "Enter username")
-    private String userName;
+    private String authorName;
     @NotEmpty(message = "Enter your answer")
-    private String answerText;
+    private String commentText;
 
-    public AdminCommentView(long id, @NotEmpty(message = "Enter username") String userName, @NotEmpty(message = "Enter your answer") String answerText) {
+    public AdminCommentView(long id, @NotEmpty(message = "Enter username") String authorName, @NotEmpty(message = "Enter your answer") String commentText) {
         this.id = id;
-        this.userName = userName;
-        this.answerText = answerText;
+        this.authorName = authorName;
+        this.commentText = commentText;
     }
 }

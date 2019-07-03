@@ -12,6 +12,7 @@ class AddArticle extends React.Component {
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleArticleShowListClick = props.handleArticleShowListClick.bind(this);
         this.state = {
             show: false,
             articleSaveDate: '',
@@ -34,9 +35,7 @@ class AddArticle extends React.Component {
     render() {
         return (
             <div >
-                {this.isEditArticle ? <EditCommentForm props={this.state} /> : <AddCommentForm props={this.state} />}
-
-
+                {this.state.isEditArticle ? <EditCommentForm props={this.state} handleArticleShowListClick={this.handleArticleShowListClick} /> : <AddCommentForm props={this.state} handleArticleShowListClick={this.handleArticleShowListClick} />}
             </div>
         );
     }
@@ -47,11 +46,15 @@ class AddCommentForm extends React.Component {
         super(props);
         this.state = {};
         this.handleAuthorInputChange = this.handleAuthorInputChange.bind(this);
-
+        this.handleArticleShowListClick = props.handleArticleShowListClick.bind(this);
     }
     createComment = async event => {
         event.preventDefault();
-        this.state.response = await post(API_ENDPOINTS.addArticle, this.state);
+        let response = await post(API_ENDPOINTS.addArticle, this.state);
+        console.log(response);
+        this.setState({ response });
+        alert("Article was saved!");
+        this.handleArticleShowListClick();
     };
     handleAuthorInputChange = event => {
         const { name, value } = event.target;
@@ -96,10 +99,14 @@ class EditCommentForm extends React.Component {
             editableArticle: props.props.props.props
         });
         this.handleAuthorInputChange = this.handleAuthorInputChange.bind(this);
+        this.handleArticleShowListClick = props.handleArticleShowListClick.bind(this);
 
     }
     createComment = async event => {
-        this.state.response = await put(API_ENDPOINTS.editArticle, this.state.editableArticle, this.state.editableArticle.id);
+        let response = await put(API_ENDPOINTS.editArticle, this.state.editableArticle, this.state.editableArticle.id);
+        this.setState({ response });
+        alert("Article was edited!");
+        this.handleArticleShowListClick();
     };
     handleAuthorInputChange = event => {
         this.setState({

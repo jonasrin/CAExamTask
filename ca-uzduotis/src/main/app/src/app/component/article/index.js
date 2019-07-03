@@ -7,6 +7,7 @@ import { API_DOMAIN, API_ENDPOINTS } from '../../utils/constants';
 import { tsPropertySignature } from '@babel/types';
 import { Button } from 'react-bootstrap';
 import AddArticle from '../addArticle';
+import { delRest } from '../../utils/delRest';
 
 
 
@@ -18,21 +19,21 @@ class Articleas extends React.Component {
         });
         this.handleArticleShowListClick = props.handleArticleShowListClick.bind(this);
         this.handleArticleEditClick = props.handleArticleEditClick.bind(this);
+        this.handleDeleteArticle = this.handleDeleteArticle.bind(this);
     }
-    // handleArticles() {
-    //     const url = API_ENDPOINTS.getArticleById + `${this.state.id}`;
+    handleDeleteArticle() {
 
-    //     this.setState = useFetch(url);
-    //     let addArticle = article => {
-    //         this.setData([...this.data, article])
-    //     };
-    // }
+        delRest(API_ENDPOINTS.deleteArticle + this.state.props.props.id);
+        alert('straipsnis buvo ištrintas');
+        this.handleArticleShowListClick();
+    }
+
     render() {
 
         return (
             <div >
                 <div>
-                    <Button onClick={() => this.handleArticleEditClick(this.state.props.props)} isEditArticle={false}>edit</Button><Button>delete</Button>
+                    <Button onClick={() => this.handleArticleEditClick(this.state.props.props)} isEditArticle={false}>edit</Button><Button onClick={this.handleDeleteArticle}>delete</Button>
                     <h1>{this.state.props.props.headline}</h1>
                     <h6>{this.props.props.articleSaveDate}</h6>
                     <p>{this.props.props.headlineText}</p>

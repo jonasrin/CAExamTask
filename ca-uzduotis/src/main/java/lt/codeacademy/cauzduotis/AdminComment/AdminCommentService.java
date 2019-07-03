@@ -7,7 +7,6 @@ import lt.codeacademy.cauzduotis.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Service
 public class AdminCommentService {
@@ -26,15 +25,15 @@ public class AdminCommentService {
         comment.setAdminComment(mapToView(adminCommentView));
         commentsRepository.save(comment);
         AdminComment commentView = comment.getAdminComment();
-        logger.info("Admin Comment by " + commentView.getUserName() + "was added. " + commentView.toString());
+        logger.info("Admin Comment by " + commentView.getAuthorName() + "was added. " + commentView.toString());
         return mapFromAdminComment(commentView);
     }
 
     private AdminCommentView mapFromAdminComment(AdminComment save) {
-        return new AdminCommentView(save.getId(), save.getUserName(), save.getAnswerText());
+        return new AdminCommentView(save.getId(), save.getAuthorName(), save.getCommentText());
     }
 
     private  AdminComment mapToView(AdminCommentView adminCommentView) {
-        return new AdminComment(adminCommentView.getUserName(), adminCommentView.getAnswerText());
+        return new AdminComment(adminCommentView.getAuthorName(), adminCommentView.getCommentText());
     }
 }

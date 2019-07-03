@@ -34,7 +34,8 @@ public class ArticleService {
 
     public ArticleView addArticle(ArticleView articleView) {
         articleView.setArticleSaveDate(LocalDate.now());
-        ArticleView view = mapToView(articleRepository.save(mapFromArticle(articleView)));
+        Article save = articleRepository.save(mapFromArticle(articleView));
+        ArticleView view = mapToView(save);
         logger.info("Article was added" + articleView.toString());
         return view;
     }
