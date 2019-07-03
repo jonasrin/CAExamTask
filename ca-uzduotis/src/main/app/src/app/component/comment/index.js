@@ -18,9 +18,24 @@ class Comment extends React.Component {
         this.forceUpdate();
     }
     HandleAddNewAdminComment(props, id) {
-        let kk = this.state.comments[id];
-        console.log(kk);
-        this.setState.comments[props.id].adminComment = props;
+        let myCom = this.state.comments.find(comment => comment.id === id);
+        myCom.adminComment = props;
+        this.state.comments.push(myCom);
+
+        // this.setState(prevState =>
+        //     (
+
+        //         {
+        //         comments: {
+        //             ...prevState.comments,
+        //             adminComments: {
+        //                 prevState.adminComments,
+        //                  props },
+        //         }
+        //     }
+        // )
+        // );
+
         //  [].adminComment.push(props);
         this.forceUpdate();
     }
