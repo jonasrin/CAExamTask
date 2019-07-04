@@ -21,7 +21,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
+    show-sql: false
     generate-ddl: true
 
 logging:

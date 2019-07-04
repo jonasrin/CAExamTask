@@ -50,11 +50,15 @@ class AddCommentForm extends React.Component {
     }
     createComment = async event => {
         event.preventDefault();
-        let response = await post(API_ENDPOINTS.addArticle, this.state);
-        console.log(response);
-        this.setState({ response });
-        alert("Article was saved!");
-        this.handleArticleShowListClick();
+        try {
+            let response = await post(API_ENDPOINTS.addArticle, this.state);
+            this.setState({ response });
+            alert("Article was saved!");
+            this.handleArticleShowListClick();
+        } catch{
+            alert("where was a problem creating your article!")
+        }
+
     };
     handleAuthorInputChange = event => {
         const { name, value } = event.target;
@@ -103,10 +107,14 @@ class EditCommentForm extends React.Component {
 
     }
     createComment = async event => {
-        let response = await put(API_ENDPOINTS.editArticle, this.state.editableArticle, this.state.editableArticle.id);
-        this.setState({ response });
-        alert("Article was edited!");
-        this.handleArticleShowListClick();
+        try {
+            let response = await put(API_ENDPOINTS.editArticle, this.state.editableArticle, this.state.editableArticle.id);
+            this.setState({ response });
+            alert("Article was edited!");
+            this.handleArticleShowListClick();
+        } catch{
+            alert("Where was a problem editing article!")
+        }
     };
     handleAuthorInputChange = event => {
         this.setState({

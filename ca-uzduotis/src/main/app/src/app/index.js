@@ -21,9 +21,19 @@ class Index extends React.Component {
             showArticle: false,
             articleId: {},
             isEditArticle: false,
+            isItAdmin: false,
         };
 
     }
+    handleLogin() {
+        this.setState({
+            isItAdmin: !this.state.isItAdmin,
+        })
+        this.forceUpdate();
+        alert(this.state.isItAdmin);
+        return this.state.isItAdmin
+    }
+
     handleArticleShowListClick() {
         this.setState({
             showAddArticle: false,
@@ -77,11 +87,11 @@ class Index extends React.Component {
         return (
             <Container>
                 <div className="App">
-                    <Header handleshowAddArticle={this.handleshowAddArticle} handleArticleShowListClick={this.handleArticleShowListClick} />
+                    <Header handleshowAddArticle={this.handleshowAddArticle} handleArticleShowListClick={this.handleArticleShowListClick} handleLogin={this.handleLogin} isItAdmin={this.state.isItAdmin} />
                     <main className="App--content ">
                         {this.state.showArticleList ? <ArticleList handleArticleListClick={this.handleArticleListClick} handleshowAddArticle={this.handleshowAddArticle} /> : null}
                         {this.state.showAddArticle ? <AddArticle props={this.state.articleId} isEditArticle={this.state.isEditArticle} handleArticleShowListClick={this.handleArticleShowListClick} /> : null}
-                        {this.state.showArticle ? <Articleas props={this.state.articleId} handleArticleEditClick={this.handleArticleEditClick} handleArticleShowListClick={this.handleArticleShowListClick} /> : null}
+                        {this.state.showArticle ? <Articleas props={this.state.articleId} handleArticleEditClick={this.handleArticleEditClick} handleArticleShowListClick={this.handleArticleShowListClick} handleLogin={this.handleLogin} /> : null}
                     </main>
                 </div>
             </Container>

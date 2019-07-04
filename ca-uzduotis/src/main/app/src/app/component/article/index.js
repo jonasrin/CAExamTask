@@ -15,11 +15,14 @@ class Articleas extends React.Component {
     constructor(props) {
         super(props);
         this.state = ({
-            props
+            props,
+            isitadmin: false,
         });
         this.handleArticleShowListClick = props.handleArticleShowListClick.bind(this);
         this.handleArticleEditClick = props.handleArticleEditClick.bind(this);
         this.handleDeleteArticle = this.handleDeleteArticle.bind(this);
+        // this.handleLogin = props.handleLogin.bind(this);
+        // this.handleMainLogin = this.handleMainLogin.bind(this);
     }
     handleDeleteArticle() {
 
@@ -27,13 +30,24 @@ class Articleas extends React.Component {
         alert('straipsnis buvo ištrintas');
         this.handleArticleShowListClick();
     }
-
+    // handleMainLogin() {
+    //     const admin = this.handleLogin();
+    //     this.setState({
+    //         isitadmin: admin,
+    //     })
+    // }
     render() {
 
         return (
             <div >
                 <div>
-                    <Button onClick={() => this.handleArticleEditClick(this.state.props.props)} isEditArticle={false}>edit</Button><Button onClick={this.handleDeleteArticle}>delete</Button>
+                    {/* {this.state.isItAdmin ?
+                        <div> */}
+                    <Button onClick={() => this.handleArticleEditClick(this.state.props.props)} isEditArticle={false}>edit</Button>
+                    <Button onClick={this.handleDeleteArticle}>delete</Button>
+                    {/* </div>
+                        : null} */}
+
                     <h1>{this.state.props.props.headline}</h1>
                     <h6>{this.props.props.articleSaveDate}</h6>
                     <p>{this.props.props.headlineText}</p>
